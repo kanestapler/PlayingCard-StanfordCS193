@@ -18,18 +18,17 @@ struct PlayingCard: CustomDebugStringConvertible {
     var rank: Rank
     
     enum Suit: String, CustomDebugStringConvertible {
-        var debugDescription: String { return self.rawValue }
+        var debugDescription: String { return rawValue }
         
-        case spades = "♠"
-        case hearts = "♥"
-        case diamonds = "♦"
-        case clubs = "♣"
+        case spades = "♠️"
+        case hearts = "♥️"
+        case diamonds = "♦️"
+        case clubs = "♣️"
         
         static var all  = [Suit.clubs, .diamonds, .spades, .hearts]
     }
     
     enum Rank: CustomDebugStringConvertible {
-        var debugDescription: String { return String(self.order) }
         
         case ace
         case face(String)
@@ -52,8 +51,16 @@ struct PlayingCard: CustomDebugStringConvertible {
             for index in 2...10 {
                 allRanks.append(Rank.numeric(index))
             }
-            allRanks += [.face("J"),.face("Q"),.face("K")]
+            allRanks += [.face("Jack"),.face("Queen"),.face("King")]
             return allRanks
+        }
+        
+        var debugDescription: String {
+            switch self {
+                case .ace: return "Ace"
+                case .face(let kind): return kind
+                case .numeric(let pips): return String(pips)
+            }
         }
     }
 }
